@@ -1,0 +1,22 @@
+=========================================================================================
+			sti aloop
+=========================================================================================
+
+Required properties:
+- compatible		: Should be "st,snd-sti-aloop"
+- st,mem-partition-name	: name of the BPA2 audio partition
+- card_index		: ALSA card number for aloop card
+- num_devices		: number of PCM devices
+			  The loop is managed by the same device from playback to capture
+
+
+Typical usage example:
+
+sti_aloop: sti-aloop {
+	compatible = "st,snd-sti-aloop";
+	status = "disabled";
+	st,mem-partition-name = "audio";
+	card_index = <1>;
+	num_devices = <4>;
+};
+

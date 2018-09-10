@@ -1,0 +1,23 @@
+menuconfig SND_STI
+	bool "STI sound devices"
+	default y
+	help
+	  Support for STI sound devices.
+
+if SND_STI
+
+config SND_STI_ALOOP
+        tristate "ST loopback driver (PCM)"
+        select SND_PCM
+        help
+          Say 'Y' or 'M' to include support for the ST PCM loopback device.
+	  This module returns played samples back to the user space using
+	  the standard ALSA PCM device. The same device routs its playback
+	  stream onto its capture stream. Module creates number of PCM devices
+	  defined in DT. There is the possibility to lock the sampling rate of
+	  a device on a given frequency set via ALSA control.
+
+	  To compile this driver as a module, choose M here: the module
+	  will be called snd-sti-aloop.
+
+endif	# SND_STI

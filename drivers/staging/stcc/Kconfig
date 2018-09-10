@@ -1,0 +1,7 @@
+config ST_CC
+	bool "Enable CryptoCore Service"
+	default n
+	depends on SOC_STIH407 = y
+	help
+	  This option enable the CryptoCore driver.
+	  It enables access to specific loading services.

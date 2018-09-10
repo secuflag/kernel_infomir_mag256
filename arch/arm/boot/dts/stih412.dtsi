@@ -1,0 +1,14 @@
+/*
+ * Copyright (C) 2015 STMicroelectronics Limited.
+ * Author: Carmelo Amoroso <carmelo.amoroso@st.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+#include "stih410.dtsi"
+/ {
+	clocks {
+		compatible = "st,stih412-clk", "simple-bus";
+	};
+};

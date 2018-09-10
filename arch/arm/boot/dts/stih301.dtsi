@@ -1,0 +1,22 @@
+/*
+ * Copyright (C) 2014 STMicroelectronics Limited.
+ * Author: Amelie Herault <amelie.herault@st.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+#include "stih410-clock.dtsi"
+#include "stih407-family.dtsi"
+/ {
+	soc {
+		st_usb_bus_config: st-usb-amba-config {
+			st,complete_on_error;
+			st,read_ahead;
+			st,max_opcode_LD64_ST64;
+			st,chunks_in_msg = <0>;
+			st,packets_in_chunk = <2>;
+			st,threshold = <256>;
+		};
+	};
+};

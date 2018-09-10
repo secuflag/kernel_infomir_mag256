@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2014 STMicroelectronics Limited.
+ * Author: Seraphin Bonnaffe <seraphin.bonnaffe@st.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+#include "stih301-b21xx.dts"
+/ {
+	model = "STiH301 MAG257";
+	compatible = "st,stih301-mag257", "st,stih301", "st,stih410";
+
+	soc {
+		pcie0: pcie@9b00000{
+			status = "okay";
+			reset-gpio = <&PIO34 2 0>;
+		};
+
+		/*
+		 * On B2196, PCIe and SATA are exclusive, and PCIe is enabled
+		 * by default. To enable SATA instead, move pcie0 node to
+		 * disabled and move sata and miphy nodes below to okay.
+		 * Note that SATA usage requires b2136 adaptor.
+		 */
+		miphy28lp_phy0: miphy28lp@0 {
+			/* select internal clock for miphy0 (sata) */
+			st,sata_gen = "gen3";
+			status = "okay";
+		};
+
+		sata0: sata@9b20000 {
+			status = "disabled";
+		};
+
+		snd_uni_player0: snd-uni-player@0 {
+			status = "okay";
+		};
+		snd_uni_player2: snd-uni-player@2 {
+			status = "okay";
+		};
+
+		snd_uni_player3: snd-uni-player@3 {
+			status = "okay";
+		};
+
+		snd_conv_dac_sc: snd-conv-dac-sc {
+			status = "okay";
+		};
+
+		snd_conv_biphase: snd-conv-biphase {
+			status = "okay";
+		};
+
+                /* SSC3 to MLB connector */
+                i2c3: i2c@9843000 {
+                        status = "disabled";
+                };
+
+                /* SSC4 to PCIe connector */
+                i2c4: i2c@9844000 {
+                        status = "disabled";
+                };
+
+		st_bus: st-bus@0 {
+			compatible = "st,busfreq";
+			status = "disabled";
+			clocks = <&CLK_S_C0_PLL1 0>,
+				 <&CLK_S_C0_QUADFS 1>,
+				 <&CLK_M_A9>;
+			clock-frequency = <300000000>,
+					  <112500034>,
+					  <375000000>;
+		};
+	};
+};

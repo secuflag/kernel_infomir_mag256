@@ -1,0 +1,21 @@
+STMicroelectronics CryptoCore driver
+------------------------------------
+
+Required properties:
+- compatible : "st,cc"
+- reg : Should contain 1 register range (address and length)
+- interrupts : Should contain 2 interrupt
+- control-words-offset : Should contain one integer
+- mbx-offset : Should contain one integer
+
+Example:
+
+cc@aabbccdd {
+	compatible		= "st,cc";
+	status			= "okay";
+	reg			= <0xaabbccdd 0x500>;
+	interrupts		= <GIC_SPI 1 IRQ_TYPE_NONE>,
+				  <GIC_SPI 2 IRQ_TYPE_NONE>;
+	st-control-words-offset	= <0x3>;
+	st-mbx-offset		= <0x4>;
+};

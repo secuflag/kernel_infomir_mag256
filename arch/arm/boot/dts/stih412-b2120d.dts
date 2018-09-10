@@ -1,0 +1,65 @@
+/*
+ * Copyright (C) 2015 STMicroelectronics (R&D) Limited.
+ * Author: Carmelo Amoroso <carmelo.amoroso@st.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+/dts-v1/;
+#include "stih412.dtsi"
+#include "stihxxx-b2120.dtsi"
+/ {
+	model = "STiH412 B2120";
+	compatible = "st,stih412-b2120", "st,stih410";
+
+	aliases {
+		usb0 = &usb0;
+		usb1 = &usb1;
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x40000000 0x80000000>;
+	};
+
+	sti_bb {
+		compatible = "st,stih407-bb";
+		cpu0-supply = <&pwm_regulator>;
+	};
+
+	pwm_regulator: pwm-regulator {
+		compatible = "st,pwm-regulator";
+		regulator-name = "CPU_1V0_AVS";
+		regulator-min-microvolt = <848000>;
+		regulator-max-microvolt = <1147000>;
+		regulator-always-on;
+		pwms = <&pwm1 3 8448>;
+		status = "okay";
+	};
+
+	soc {
+		mmc0: sdhci@09060000 {
+			status = "okay";
+			non-removable;
+		};
+
+		pwm1: pwm@9510000 {
+			compatible = "st,sti-pwm";
+			status = "okay";
+			pinctrl-0 = <&pinctrl_pwm1_chan3_default>;
+		};
+
+		usb0: usb@9A00000 {
+			status = "okay";
+		};
+
+		usb1: usb@9A80000 {
+			status = "okay";
+		};
+
+		ddr-pctl-controller {
+			st,ddr-poweroff-gpio = <&PIO1 2 0>;
+		};
+	};
+};
